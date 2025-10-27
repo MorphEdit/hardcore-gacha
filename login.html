@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hardcore Gacha</title>
+    <title>Login | Hardcore Gacha</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,46 +17,46 @@
   <body>
     <div id="particles"></div>
 
-    <div class="container">
-      <div class="navbar bungee-regular">
-        <div class="left">
+    <div class="container bungee-regular">
+      <div class="login-wrapper">
+        <div class="login-box">
           <div class="logo">
             <img src="img/logo.png" alt="logo" />
           </div>
-        </div>
+          <h1 class="title">Login</h1>
+          <p class="subtitle">Enter your username and password to continue</p>
 
-        <div class="right">
-          <div class="menu">
-            <button class="home">home</button>
-            <button class="about">about</button>
-            <button class="blogs">blogs</button>
-            <button class="mm">mm</button>
-            <button class="contact">contact</button>
+          <div class="form">
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              autocomplete="off"
+            />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              autocomplete="off"
+            />
+
+            <button id="btnLogin" class="login-btn bungee-regular">
+              Login
+            </button>
+
+            <div class="bottom-text">
+              Don’t have an account?
+              <a href="register.html">Register</a>
+            </div>
           </div>
 
-          <div class="auth-buttons">
-            <a class="login-btn" href="login.html">login</a>
-            <a class="register-btn" href="register.html">register</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="half bungee-regular">
-        <div class="r">
-          <div class="title">Welcome To Hardcore Gacha</div>
-          <div class="subtitle">
-            Summon your destiny through chaos and chance as you step into a
-            world where every pull could make you a legend or break your soul
-            and only the fearless keep spinning for glory.
-          </div>
-        </div>
-        <div class="l">
-          <img src="img/logo.webp" alt="logo" />
+          <div id="status" class="status"></div>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script src="api.js"></script>
     <script>
       tsParticles.load("particles", {
         particles: {
