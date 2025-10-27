@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hardcore Gacha</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="scss/index.css" />
+  </head>
+  <body>
+    <div id="particles"></div>
+
+    <div class="container">
+      <div class="navbar bungee-regular">
+        <div class="left">
+          <div class="logo">
+            <img src="img/logo.png" alt="logo" />
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="menu">
+            <button class="home">home</button>
+            <button class="about">about</button>
+            <button class="blogs">blogs</button>
+            <button class="mm">mm</button>
+            <button class="contact">contact</button>
+          </div>
+
+          <div class="auth-buttons">
+            <button class="login-btn">login</button>
+            <button class="register-btn">register</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="half bungee-regular">
+        <div class="r">
+          <div class="title">Welcome To Hardcore Gacha</div>
+          <div class="subtitle">
+            Summon your destiny through chaos and chance as you step into a
+            world where every pull could make you a legend or break your soul
+            and only the fearless keep spinning for glory.
+          </div>
+        </div>
+        <div class="l">
+          <img src="img/logo.webp" alt="logo" />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script>
+      tsParticles.load("particles", {
+        particles: {
+          number: { value: 80 },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 2 },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "top",
+            random: true,
+            outModes: "out",
+          },
+        },
+        background: { color: "transparent" },
+      });
+    </script>
+  </body>
+</html>
