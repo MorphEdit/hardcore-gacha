@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .tower-page {
   display: flex;
   flex-direction: column;
@@ -6,21 +7,21 @@
   position: relative;
   z-index: 2;
   color: #fff;
+  font-family: "Bungee", system-ui;
 }
 
 .tower-wrapper {
   display: flex;
-  flex-wrap: wrap;
   gap: 2rem;
   width: 100%;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .card {
-  background: radial-gradient(circle at 20% 20%, rgba(40, 40, 60, 0.9) 0%, rgba(10, 10, 20, 0.8) 60%);
-  border: 2px solid rgba(180, 120, 255, 0.4);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), 0 0 24px rgba(175, 120, 255, 0.4), 0 0 60px rgba(175, 120, 255, 0.15);
+  position: relative;
+  background: radial-gradient(circle at 20% 20%, rgba(32, 32, 40, 0.9) 0%, rgba(10, 10, 15, 0.8) 60%);
+  border: 2px solid rgba(100, 100, 120, 0.4);
   border-radius: 1rem;
   padding: 1.5rem;
   min-width: 300px;
@@ -34,20 +35,40 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font-family: "Bungee", system-ui;
   margin-bottom: 1rem;
 }
 .card .card-head .title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
   font-size: 1rem;
   line-height: 1.2rem;
   color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 10px rgba(175, 120, 255, 0.8);
 }
 .card .card-head .note {
   font-size: 0.7rem;
   line-height: 0.8rem;
-  color: #cfaaff;
+  color: #c9c9d4;
   text-align: right;
+}
+.card .card-head .note.ready {
+  color: #8fe4b4;
+}
+.card .card-head .note.danger {
+  color: #ff91a2;
+}
+
+.floor-select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(140, 140, 160, 0.6);
+  border-radius: 0.4rem;
+  color: #fff;
+  font-family: "Bungee", system-ui;
+  font-size: 0.6rem;
+  padding: 0.3rem 0.5rem;
+  outline: none;
+  cursor: pointer;
 }
 
 .party-card .party-slots {
@@ -56,31 +77,69 @@
   gap: 1rem;
 }
 .party-card .party-slot {
+  position: relative;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.07), 0 0 16px rgba(175, 120, 255, 0.25);
+  overflow: hidden;
+}
+.party-card .party-slot.filled {
+  border-color: rgba(143, 228, 180, 0.6);
 }
 .party-card .party-slot .slot-top {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.4rem;
+  min-width: 0;
 }
 .party-card .party-slot .slot-top .char-name {
   font-size: 0.9rem;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.party-card .party-slot .slot-top .char-name .tier-badge {
+  font-size: 0.55rem;
+  line-height: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.4rem;
+  background: rgba(140, 140, 160, 0.15);
+  border: 1px solid rgba(140, 140, 160, 0.6);
+  color: #fff;
+  white-space: nowrap;
 }
 .party-card .party-slot .slot-top .char-meta {
   font-size: 0.7rem;
-  color: #9f87d7;
+  color: #b8b4cf;
+  line-height: 1rem;
+  word-break: break-word;
+}
+.party-card .party-slot .slot-top .hp-bar {
+  position: relative;
+  width: 130px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+.party-card .party-slot .slot-top .hp-bar .hp-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--hpFill, 100%);
+  background: linear-gradient(to right, #8fe4b4 0%, #3a7b58 100%);
+  transition: width 0.25s linear;
 }
 .party-card .party-slot .btn-choose {
-  background: rgba(175, 120, 255, 0.15);
-  border: 1px solid rgba(175, 120, 255, 0.6);
+  background: rgba(140, 140, 160, 0.15);
+  border: 1px solid rgba(140, 140, 160, 0.6);
   color: #fff;
   font-family: "Bungee", system-ui;
   font-size: 0.7rem;
@@ -88,10 +147,9 @@
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(175, 120, 255, 0.7), 0 0 24px rgba(175, 120, 255, 0.4);
 }
 .party-card .party-slot .btn-choose:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.15);
 }
 .party-card .party-footer {
   display: flex;
@@ -105,11 +163,18 @@
   font-family: "Bungee", system-ui;
   font-size: 0.8rem;
   color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 10px rgba(175, 120, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.party-card .party-footer .coins-line::before {
+  content: "⛁";
+  font-size: 0.8rem;
+  color: #fff8a6;
 }
 .party-card .party-footer .btn-restart {
-  background: rgba(255, 80, 120, 0.15);
-  border: 1px solid rgba(255, 80, 120, 0.6);
+  background: rgba(160, 60, 80, 0.15);
+  border: 1px solid rgba(200, 90, 110, 0.6);
   color: #fff;
   font-family: "Bungee", system-ui;
   font-size: 0.6rem;
@@ -117,31 +182,39 @@
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 80, 120, 0.7), 0 0 24px rgba(255, 80, 120, 0.4);
 }
 .party-card .party-footer .btn-restart:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.15);
 }
 
 .floor-card .enemy-box {
+  position: relative;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  min-height: 70px;
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.07), 0 0 16px rgba(175, 120, 255, 0.25);
+  overflow: hidden;
 }
 .floor-card .enemy-box .enemy-name {
   font-size: 0.9rem;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.floor-card .enemy-box .enemy-name::before {
+  content: "☠";
+  font-size: 0.8rem;
+  color: #ff6b8a;
 }
 .floor-card .enemy-box .enemy-power {
   font-size: 0.7rem;
-  color: #9f87d7;
+  color: #ff91a2;
   margin-top: 0.25rem;
 }
 .floor-card .fight-controls {
@@ -150,8 +223,8 @@
   margin-bottom: 1rem;
 }
 .floor-card .fight-controls .btn-fight {
-  background: rgba(120, 255, 170, 0.15);
-  border: 1px solid rgba(120, 255, 170, 0.6);
+  background: rgba(80, 140, 100, 0.15);
+  border: 1px solid rgba(120, 200, 150, 0.6);
   color: #fff;
   font-family: "Bungee", system-ui;
   font-size: 0.8rem;
@@ -159,11 +232,16 @@
   border-radius: 0.5rem;
   padding: 0.6rem 1rem;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(120, 255, 170, 0.7), 0 0 24px rgba(120, 255, 170, 0.4);
   text-align: center;
+  transition: all 0.15s;
 }
-.floor-card .fight-controls .btn-fight:hover {
-  filter: brightness(1.2);
+.floor-card .fight-controls .btn-fight:hover:not([disabled]) {
+  filter: brightness(1.15);
+}
+.floor-card .fight-controls .btn-fight[disabled] {
+  opacity: 0.4;
+  filter: grayscale(1);
+  cursor: not-allowed;
 }
 .floor-card .fight-result {
   font-size: 0.75rem;
@@ -171,38 +249,191 @@
   line-height: 1.2rem;
   color: #fff;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.07), 0 0 16px rgba(175, 120, 255, 0.25);
+}
+.floor-card .fight-result.win {
+  border-color: rgba(120, 200, 150, 0.6);
+  color: #8fe4b4;
+}
+.floor-card .fight-result.lose {
+  border-color: rgba(200, 90, 110, 0.6);
+  color: #ff91a2;
+}
+
+.replay-box {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  display: none;
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.replay-box::after {
+  content: "LIVE";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: rgba(200, 90, 110, 0.15);
+  border: 1px solid rgba(200, 90, 110, 0.6);
+  border-radius: 0.4rem;
+  font-family: "Bungee", system-ui;
+  font-size: 0.55rem;
+  line-height: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  color: #ff91a2;
+  animation: blinkLive 1s infinite;
+}
+
+@keyframes blinkLive {
+  0%, 60% {
+    opacity: 1;
+  }
+  61%, 100% {
+    opacity: 0.2;
+  }
+}
+.replay-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.replay-sides {
+  display: flex;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.replay-side {
+  background: rgba(20, 20, 30, 0.4);
+  border: 1px solid rgba(140, 140, 160, 0.4);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  min-width: 140px;
+  flex: 1 1 auto;
+  max-height: 180px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.replay-side .replay-side-title {
+  font-family: "Bungee", system-ui;
+  font-size: 0.65rem;
+  line-height: 0.75rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.replay-side .replay-side-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.replay-unit {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  color: #d9d3ff;
+}
+.replay-unit .replay-unit-name {
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.replay-unit .replay-unit-hp {
+  font-size: 0.65rem;
+  color: #b8b4cf;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.replay-unit .replay-unit-hp .replay-hpbar {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+.replay-unit .replay-unit-hp .replay-hpbar .replay-hpbar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--hpFill, 100%);
+  background: linear-gradient(to right, #8fe4b4 0%, #3a7b58 100%);
+  transition: width 0.25s linear;
+}
+
+.replay-log-box {
+  background: rgba(20, 20, 30, 0.4);
+  border: 1px solid rgba(120, 200, 150, 0.4);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  flex: 1 1 200px;
+  min-width: 200px;
+  max-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+.replay-log-box .replay-log-head {
+  font-family: "Bungee", system-ui;
+  font-size: 0.65rem;
+  line-height: 0.75rem;
+  color: #8fe4b4;
+  margin-bottom: 0.5rem;
+}
+.replay-log-box .replay-log-scroll {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  color: #dfffea;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .log-card {
   max-width: 860px;
   width: 100%;
-  margin: 0 auto 4rem;
 }
 .log-card .log-list {
   display: flex;
   flex-direction: column-reverse;
-  max-height: 200px;
+  max-height: 425px;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   gap: 0.75rem;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.07), 0 0 16px rgba(175, 120, 255, 0.25);
 }
 .log-card .log-list .log-item {
   font-size: 0.7rem;
   line-height: 1rem;
   color: #d9d3ff;
-  background: rgba(30, 20, 60, 0.4);
-  border: 1px solid rgba(175, 120, 255, 0.4);
+  background: rgba(30, 30, 45, 0.4);
+  border: 1px solid rgba(140, 140, 160, 0.4);
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
-  box-shadow: 0 0 8px rgba(175, 120, 255, 0.5), 0 0 24px rgba(175, 120, 255, 0.2);
 }
 
 .roster-modal {
@@ -232,30 +463,32 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding-right: 0.5rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
 }
 .roster-modal .roster-panel .roster-list .roster-card {
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.07), 0 0 16px rgba(175, 120, 255, 0.25);
+  transition: all 0.15s;
 }
 .roster-modal .roster-panel .roster-list .roster-card:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.15);
 }
 .roster-modal .roster-panel .roster-list .roster-card .roster-line1 {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
   color: #fff;
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
 }
 .roster-modal .roster-panel .roster-list .roster-card .roster-line1 .roster-name {
   color: #fff;
 }
 .roster-modal .roster-panel .roster-list .roster-card .roster-line1 .roster-meta {
-  color: #9f87d7;
+  color: #b8b4cf;
   font-size: 0.7rem;
   margin-left: 0.5rem;
   text-align: right;
@@ -268,15 +501,16 @@
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
   font-size: 0.7rem;
-  color: #c9baff;
+  color: #c9c4e6;
 }
 .roster-modal .roster-panel .roster-bottom {
   margin-top: 1rem;
   display: flex;
   justify-content: center;
+  padding-bottom: 1rem;
 }
 .roster-modal .roster-panel .roster-bottom .btn-close {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
   font-family: "Bungee", system-ui;
@@ -285,8 +519,30 @@
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 24px rgba(255, 255, 255, 0.2);
 }
 .roster-modal .roster-panel .roster-bottom .btn-close:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.15);
+}
+
+.replay-side-list::-webkit-scrollbar,
+.replay-log-scroll::-webkit-scrollbar,
+.log-list::-webkit-scrollbar,
+.roster-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.replay-side-list::-webkit-scrollbar-track,
+.replay-log-scroll::-webkit-scrollbar-track,
+.log-list::-webkit-scrollbar-track,
+.roster-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+.replay-side-list::-webkit-scrollbar-thumb,
+.replay-log-scroll::-webkit-scrollbar-thumb,
+.log-list::-webkit-scrollbar-thumb,
+.roster-list::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 160, 0.4);
+  border-radius: 999px;
 }/*# sourceMappingURL=tower.css.map */

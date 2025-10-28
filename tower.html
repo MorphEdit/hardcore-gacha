@@ -110,15 +110,42 @@
 
           <div class="fight-result" id="fightResult">No battle yet.</div>
         </div>
-      </div>
 
-      <div class="log-card card">
-        <div class="card-head">
-          <div class="title">BATTLE LOG</div>
-          <div class="note">LATEST FIRST</div>
+        <div class="combat-card card">
+          <div class="card-head">
+            <div class="title">COMBAT</div>
+            <div class="note">live replay</div>
+          </div>
+
+          <div class="replay-box" id="replayBox">
+            <div class="replay-top">
+              <div class="replay-sides">
+                <div class="replay-side">
+                  <div class="replay-side-title">ALLY</div>
+                  <div class="replay-side-list" id="replayAllies"></div>
+                </div>
+                <div class="replay-side">
+                  <div class="replay-side-title">ENEMY</div>
+                  <div class="replay-side-list" id="replayEnemies"></div>
+                </div>
+              </div>
+
+              <div class="replay-log-box">
+                <div class="replay-log-head">COMBAT LOG</div>
+                <div class="replay-log-scroll" id="replayLog"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="log-list" id="logList"></div>
+        <div class="log-card card">
+          <div class="card-head">
+            <div class="title">BATTLE LOG</div>
+            <div class="note">LATEST FIRST</div>
+          </div>
+
+          <div class="log-list" id="logList"></div>
+        </div>
       </div>
     </div>
 
