@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tower | Hardcore Gacha</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/tower.css" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+  </head>
+  <body class="bungee-regular">
+    <div id="particles"></div>
+
+    <div class="container tower-page">
+      <div class="navbar bungee-regular">
+        <div class="left">
+          <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="logo" />
+          </a>
+        </div>
+
+        <div class="right">
+          <div class="menu">
+            <button class="home" onclick="window.location.href='index.html'">
+              Home
+            </button>
+            <button class="gacha" onclick="window.location.href='gacha.html'">
+              Gacha
+            </button>
+            <button
+              class="tower active"
+              onclick="window.location.href='tower.html'"
+            >
+              Tower
+            </button>
+          </div>
+
+          <div class="auth-buttons" id="authButtons">
+            <a class="login-btn" href="login.html">login</a>
+            <a class="register-btn" href="register.html">register</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tower-wrapper">
+        <div class="party-card card">
+          <div class="card-head">
+            <div class="title">YOUR PARTY</div>
+            <div class="note"><span id="playerName">-</span></div>
+          </div>
+
+          <div class="party-slots">
+            <div class="party-slot" data-slot="0">
+              <div class="slot-top">
+                <div class="char-name" id="slotName0">EMPTY</div>
+                <div class="char-meta" id="slotMeta0">—</div>
+              </div>
+              <button class="btn-choose" data-slotpick="0">Choose</button>
+            </div>
+
+            <div class="party-slot" data-slot="1">
+              <div class="slot-top">
+                <div class="char-name" id="slotName1">EMPTY</div>
+                <div class="char-meta" id="slotMeta1">—</div>
+              </div>
+              <button class="btn-choose" data-slotpick="1">Choose</button>
+            </div>
+
+            <div class="party-slot" data-slot="2">
+              <div class="slot-top">
+                <div class="char-name" id="slotName2">EMPTY</div>
+                <div class="char-meta" id="slotMeta2">—</div>
+              </div>
+              <button class="btn-choose" data-slotpick="2">Choose</button>
+            </div>
+          </div>
+
+          <div class="party-footer">
+            <div class="coins-line"><span id="playerCoins">0</span> COINS</div>
+            <button class="btn-restart" id="btnRestart">RESTART RUN</button>
+          </div>
+        </div>
+
+        <div class="floor-card card">
+          <div class="card-head">
+            <div class="title">
+              FLOOR <span id="floorNum">1</span>
+              <select id="floorSelect" class="floor-select"></select>
+            </div>
+
+            <div class="note" id="floorNote">Ready</div>
+          </div>
+
+          <div class="enemy-box">
+            <div class="enemy-name" id="enemyName">???</div>
+            <div class="enemy-power" id="enemyPower">Power: -</div>
+          </div>
+
+          <div class="fight-controls">
+            <button class="btn-fight" id="btnFight">FIGHT THIS FLOOR</button>
+          </div>
+
+          <div class="fight-result" id="fightResult">No battle yet.</div>
+        </div>
+      </div>
+
+      <div class="log-card card">
+        <div class="card-head">
+          <div class="title">BATTLE LOG</div>
+          <div class="note">LATEST FIRST</div>
+        </div>
+
+        <div class="log-list" id="logList"></div>
+      </div>
+    </div>
+
+    <div class="roster-modal hidden" id="rosterModal">
+      <div class="roster-panel card">
+        <div class="card-head">
+          <div class="title">CHOOSE UNIT</div>
+          <div class="note">click to assign</div>
+        </div>
+
+        <div class="roster-list" id="rosterList"></div>
+
+        <div class="roster-bottom">
+          <button class="btn-close" id="closeRoster">CLOSE</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+    <script src="api.js"></script>
+    <script src="tower.js"></script>
+
+    <script>
+      tsParticles.load("particles", {
+        particles: {
+          number: { value: 80 },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 2 },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "top",
+            random: true,
+            outModes: "out",
+          },
+        },
+        background: { color: "transparent" },
+      });
+
+      (function () {
+        const token = localStorage.getItem("token");
+        const authButtons = document.getElementById("authButtons");
+
+        if (token) {
+          authButtons.innerHTML = `
+            <button class="login-btn" id="logoutBtn">logout</button>
+          `;
+
+          document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("token");
+            window.location.reload();
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
