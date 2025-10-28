@@ -1,0 +1,108 @@
+$bg1: #7a63b9;
+$bg2: #101010;
+$text: #ffffff;
+$text-fade: rgba(255, 255, 255, 0.8);
+$accent: #9f84ff;
+$dark: rgba(0, 0, 0, 0.8);
+$font-main: 'Bungee', sans-serif;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  color: $text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient($bg1, $bg2);
+  font-family: $font-main;
+}
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.popup-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  .popup-box {
+    background: $dark;
+    border: 2px solid $accent;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba($accent, 0.6);
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    .title {
+      font-size: 1.8rem;
+      color: $accent;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      font-size: 1rem;
+      color: $text-fade;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      .btn {
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.6rem 1.4rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: $font-main;
+        color: $text;
+        background: transparent;
+        transition: 0.2s;
+
+        &:hover {
+          background: $accent;
+          border-color: transparent;
+        }
+
+        &.cancel {
+          background: transparent;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

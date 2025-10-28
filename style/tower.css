@@ -545,4 +545,248 @@
 .roster-list::-webkit-scrollbar-thumb {
   background: rgba(140, 140, 160, 0.4);
   border-radius: 999px;
+}
+
+/* --- card frame + glow -------------------------------------------------- */
+.card {
+  border: 2px solid rgba(159, 140, 255, 0.4);
+  box-shadow: 0 0 20px rgba(159, 140, 255, 0.4), 0 0 60px rgba(122, 99, 185, 0.25);
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15), 0 0 60px rgba(122, 99, 185, 0.3);
+}
+
+/* --- tower layout entrance animations ----------------------------------- */
+/* เราจะโชว์การ์ดแบบเข้าทีละ batch:
+   - left group (party-card + floor-card) โผล่ก่อน
+   - right group (combat-card + log-card) ตามหลังนิดนึง
+*/
+@keyframes towerCardLeftIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    box-shadow: 0 0 0 rgba(159, 140, 255, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 80px rgba(122, 99, 185, 0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 20px rgba(159, 140, 255, 0.4), 0 0 60px rgba(122, 99, 185, 0.25);
+  }
+}
+@keyframes towerCardRightIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    filter: brightness(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+/* apply animation */
+.party-card,
+.floor-card {
+  animation: towerCardLeftIn 0.5s ease forwards;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.combat-card,
+.log-card {
+  animation: towerCardRightIn 0.5s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+  transform-origin: center;
+}
+
+/* --- pulse / attention details ------------------------------------------ */
+/* Enemy box: subtle danger pulse border */
+@keyframes enemyPulse {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 107, 138, 0.4), 0 0 24px rgba(255, 107, 138, 0);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 107, 138, 0.8), 0 0 30px rgba(255, 107, 138, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 107, 138, 0.4), 0 0 24px rgba(255, 107, 138, 0);
+  }
+}
+.floor-card .enemy-box {
+  animation: enemyPulse 2s ease-in-out infinite;
+  border-color: rgba(255, 107, 138, 0.6);
+}
+
+/* Fight result gets aura when it's win or lose */
+.fight-result.win {
+  box-shadow: 0 0 10px rgba(121, 255, 159, 0.5), 0 0 30px rgba(121, 255, 159, 0.25);
+}
+
+.fight-result.lose {
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5), 0 0 30px rgba(255, 77, 77, 0.25);
+}
+
+/* LIVE badge in replay-box already blinks, we'll give box a soft scanline glow */
+@keyframes liveGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(200, 90, 110, 0.4), 0 0 30px rgba(200, 90, 110, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(200, 90, 110, 0.8), 0 0 40px rgba(200, 90, 110, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(200, 90, 110, 0.4), 0 0 30px rgba(200, 90, 110, 0.2);
+  }
+}
+.replay-box {
+  animation: liveGlow 2s ease-in-out infinite;
+}
+
+/* --- interactive buttons feel ------------------------------------------- */
+.btn-choose,
+.btn-restart,
+.btn-fight,
+.btn-close {
+  transition: filter 0.15s, box-shadow 0.15s, transform 0.1s;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+.btn-choose:hover:not([disabled]),
+.btn-restart:hover:not([disabled]),
+.btn-fight:hover:not([disabled]),
+.btn-close:hover:not([disabled]) {
+  filter: brightness(1.15);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.4), 0 0 48px rgba(255, 255, 255, 0.15);
+}
+.btn-choose:active:not([disabled]),
+.btn-restart:active:not([disabled]),
+.btn-fight:active:not([disabled]),
+.btn-close:active:not([disabled]) {
+  transform: scale(0.96);
+}
+
+/* --- roster modal polish ------------------------------------------------- */
+/* ทำให้ modal backdrop ดูเป็น layer game UI มากขึ้น ไม่ใช่ดำทึบ */
+.roster-modal {
+  background: radial-gradient(circle at 50% 20%, rgba(122, 99, 185, 0.35) 0%, rgba(0, 0, 0, 0.75) 60%), rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+/* panel เองเรายืม glow เดียวกับการ์ด */
+.roster-panel {
+  border: 2px solid rgba(159, 140, 255, 0.4);
+  box-shadow: 0 0 20px rgba(159, 140, 255, 0.4), 0 0 60px rgba(122, 99, 185, 0.25);
+  position: relative;
+}
+.roster-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15), 0 0 60px rgba(122, 99, 185, 0.3);
+}
+
+/* roster card hover is already brighter, let’s add a faint glow */
+.roster-card {
+  box-shadow: 0 0 10px rgba(159, 140, 255, 0.15);
+}
+.roster-card:hover {
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.4), 0 0 40px rgba(159, 140, 255, 0.4);
+}
+
+/* --- scrollbars theme upgrade ------------------------------------------- */
+.replay-side-list,
+.replay-log-scroll,
+.log-list,
+.roster-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(159, 140, 255, 0.6) rgba(15, 15, 24, 0.4);
+}
+
+.replay-side-list::-webkit-scrollbar,
+.replay-log-scroll::-webkit-scrollbar,
+.log-list::-webkit-scrollbar,
+.roster-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.replay-side-list::-webkit-scrollbar-track,
+.replay-log-scroll::-webkit-scrollbar-track,
+.log-list::-webkit-scrollbar-track,
+.roster-list::-webkit-scrollbar-track {
+  background: rgba(15, 15, 24, 0.4);
+  border-radius: 999px;
+}
+
+.replay-side-list::-webkit-scrollbar-thumb,
+.replay-log-scroll::-webkit-scrollbar-thumb,
+.log-list::-webkit-scrollbar-thumb,
+.roster-list::-webkit-scrollbar-thumb {
+  background: radial-gradient(circle at 20% 20%, #9f8cff 0%, #4a00c9 80%);
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(159, 140, 255, 0.8), 0 0 20px rgba(159, 140, 255, 0.4);
+}
+
+/* --- responsive tweaks --------------------------------------------------- */
+/* ปรับ tower-wrapper ให้พังลงเป็น 2 แถว / 1 แถวตอนจอเล็ก */
+@media (max-width: 1300px) {
+  .tower-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .party-card,
+  .floor-card,
+  .combat-card,
+  .log-card {
+    max-width: 500px;
+  }
+  .log-card {
+    order: 4;
+  }
+}
+@media (max-width: 700px) {
+  .tower-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .party-card,
+  .floor-card,
+  .combat-card,
+  .log-card {
+    width: 90%;
+    max-width: 400px;
+    min-width: unset;
+  }
+  .replay-top {
+    flex-direction: column;
+  }
+  .replay-sides {
+    flex-direction: column;
+  }
+  .replay-log-box {
+    max-height: 200px;
+  }
+  .log-list {
+    max-height: 300px;
+  }
 }/*# sourceMappingURL=tower.css.map */

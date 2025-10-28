@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Required | Hardcore Gacha</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style/popup.css" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+  </head>
+
+  <body class="bungee-regular">
+    <div id="particles"></div>
+
+    <div class="popup-overlay">
+      <div class="popup-box">
+        <h1 class="title">Hold on!</h1>
+
+        <p class="message">
+          You need to <strong>log in</strong> before continuing.
+        </p>
+
+        <div class="buttons">
+          <a href="login.html" class="btn login">Login</a>
+          <a href="register.html" class="btn register">Register</a>
+          <button class="btn cancel" onclick="window.history.back()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script>
+      tsParticles.load("particles", {
+        particles: {
+          number: { value: 80 },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 2 },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "top",
+            random: true,
+            outModes: "out",
+          },
+        },
+        background: { color: "transparent" },
+      });
+    </script>
+  </body>
+</html>

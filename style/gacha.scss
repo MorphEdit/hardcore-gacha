@@ -271,3 +271,216 @@
 .result-card.legendary {
   border-color: rgba(255, 110, 255, 0.9);
 }
+
+.gacha-reel-card,
+.gacha-result-card {
+  position: relative;
+  border: 2px solid rgba(159, 140, 255, 0.4);
+  box-shadow: 0 0 20px rgba(159, 140, 255, 0.4),
+    0 0 60px rgba(122, 99, 185, 0.3);
+}
+
+.gacha-reel-card::before,
+.gacha-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(122, 99, 185, 0.4);
+}
+
+@keyframes gachaCardLeftIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    box-shadow: 0 0 0 rgba(159, 140, 255, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 80px rgba(122, 99, 185, 0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 20px rgba(159, 140, 255, 0.4),
+      0 0 60px rgba(122, 99, 185, 0.3);
+  }
+}
+
+@keyframes gachaCardRightIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    filter: brightness(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+.gacha-reel-card {
+  animation: gachaCardLeftIn 0.5s ease forwards;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.gacha-result-card {
+  animation: gachaCardRightIn 0.5s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+  transform-origin: center;
+}
+
+@keyframes markerPulse {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(159, 140, 255, 0.6);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1),
+      0 0 40px rgba(159, 140, 255, 0.9);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(159, 140, 255, 0.6);
+    opacity: 1;
+  }
+}
+
+.reel-marker {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 30px rgba(159, 140, 255, 0.6);
+  animation: markerPulse 2s ease-in-out infinite;
+}
+
+.result-card.legendary {
+  position: relative;
+  box-shadow: 0 0 20px rgba(255, 110, 255, 0.6),
+    0 0 60px rgba(255, 110, 255, 0.3);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: 0 0 30px rgba(255, 110, 255, 0.8),
+      0 0 80px rgba(255, 110, 255, 0.4);
+  }
+}
+
+.btn-pull {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 218, 56, 0.4);
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(255, 218, 56, 0.6);
+  }
+}
+
+.btn-pull.multi {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(166, 107, 255, 0.5);
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(166, 107, 255, 0.8);
+  }
+}
+
+.result-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(159, 140, 255, 0.6) rgba(15, 15, 24, 0.4);
+}
+
+.result-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result-list::-webkit-scrollbar-track {
+  background: rgba(15, 15, 24, 0.4);
+  border-radius: 10px;
+}
+
+.result-list::-webkit-scrollbar-thumb {
+  background: radial-gradient(circle at 20% 20%, #9f8cff 0%, #4a00c9 80%);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(159, 140, 255, 0.8),
+    0 0 20px rgba(159, 140, 255, 0.4);
+}
+
+@media (max-width: 900px) {
+  .gacha-wrapper {
+    padding: 0 1rem;
+  }
+
+  .gacha-reel-card,
+  .gacha-result-card {
+    min-height: unset;
+  }
+
+  .reel-viewport {
+    height: 120px;
+  }
+
+  .reel {
+    height: 120px;
+  }
+
+  .reel-item {
+    width: 100px;
+    min-width: 100px;
+    height: 90px;
+    .tier-label {
+      font-size: 0.55rem;
+    }
+    .char-name {
+      font-size: 0.7rem;
+    }
+    .char-lv {
+      font-size: 0.75rem;
+    }
+  }
+
+  .btn-pull {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .statusline {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-head .title {
+    font-size: 0.9rem;
+  }
+
+  .card-head .coins,
+  .card-head .note {
+    font-size: 0.7rem;
+  }
+
+  .btn-pull {
+    padding: 0.7rem 0.8rem;
+    border-radius: 10px;
+  }
+}
