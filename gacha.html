@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hardcore Gacha</title>
+    <title>Gacha | Hardcore Gacha</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,12 +13,14 @@
     />
 
     <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/gacha.css" />
     <link rel="icon" type="image/png" href="img/logo.png" />
   </head>
-  <body>
+
+  <body class="bungee-regular">
     <div id="particles"></div>
 
-    <div class="container">
+    <div class="container gacha-page">
       <div class="navbar bungee-regular">
         <div class="left">
           <a href="index.html" class="logo">
@@ -31,7 +33,10 @@
             <button class="home" onclick="window.location.href='index.html'">
               Home
             </button>
-            <button class="gacha" onclick="window.location.href='gacha.html'">
+            <button
+              class="gacha active"
+              onclick="window.location.href='gacha.html'"
+            >
               Gacha
             </button>
           </div>
@@ -43,22 +48,45 @@
         </div>
       </div>
 
-      <div class="half bungee-regular">
-        <div class="r">
-          <div class="title">Welcome To Hardcore Gacha</div>
-          <div class="subtitle">
-            Summon your destiny through chaos and chance as you step into a
-            world where every pull could make you a legend or break your soul
-            and only the fearless keep spinning for glory.
+      <div class="gacha-wrapper">
+        <div class="gacha-reel-card">
+          <div class="card-head">
+            <div class="title">HARDCORE PULL</div>
+            <div class="coins"><span id="coins">0</span> COINS</div>
+          </div>
+
+          <div class="reel-viewport">
+            <div class="reel" id="reel"></div>
+
+            <div class="reel-marker"></div>
+          </div>
+
+          <div class="pull-buttons">
+            <button id="pull1" class="btn-pull">PULL X1</button>
+            <button id="pull3" class="btn-pull multi">PULL X3</button>
+          </div>
+
+          <div class="statusline">
+            <span id="pullStatus">Ready.</span>
           </div>
         </div>
-        <div class="l">
-          <img src="img/logo.webp" alt="logo" />
+
+        <div class="gacha-result-card">
+          <div class="card-head">
+            <div class="title">RESULTS</div>
+            <div class="note">NEWEST FIRST</div>
+          </div>
+
+          <div class="result-list" id="resultsList"></div>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+    <script src="api.js"></script>
+    <script src="gacha.js"></script>
+
     <script>
       tsParticles.load("particles", {
         particles: {

@@ -6,7 +6,7 @@ const api = {
     const tok = localStorage.getItem('token');
     if (tok) headers['X-Auth'] = tok;
 
-    const url = path.startsWith('http') ? path : API_BASE + path; // <— เพิ่มตรงนี้
+    const url = path.startsWith('http') ? path : API_BASE + path;
     const res = await fetch(url, {
       method,
       headers,

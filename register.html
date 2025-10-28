@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Hardcore Gacha</title>
+    <title>Register | Hardcore Gacha</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,8 +24,8 @@
           <div class="logo">
             <img src="img/logo.png" alt="logo" />
           </div>
-          <h1 class="title">Login</h1>
-          <p class="subtitle">Enter your username and password to continue</p>
+          <h1 class="title">Register</h1>
+          <p class="subtitle">Create your account to start your journey</p>
 
           <div class="form">
             <input
@@ -41,13 +41,13 @@
               autocomplete="off"
             />
 
-            <button id="btnLogin" class="login-btn bungee-regular">
-              Login
+            <button id="btnRegister" class="login-btn bungee-regular">
+              Register
             </button>
 
             <div class="bottom-text">
-              Don’t have an account?
-              <a href="register.html">Register</a>
+              Already have an account?
+              <a href="login.html">Login</a>
             </div>
           </div>
 
@@ -79,19 +79,19 @@
     </script>
 
     <script>
-      const btn = document.getElementById("btnLogin");
+      const btn = document.getElementById("btnRegister");
       const statusBox = document.getElementById("status");
 
       btn.addEventListener("click", async () => {
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
-        statusBox.textContent = "Logging in...";
+        statusBox.textContent = "Registering...";
 
         try {
-          const res = await api.login(username, password);
+          const res = await api.register(username, password);
           if (res.token) {
             localStorage.setItem("token", res.token);
-            statusBox.textContent = "✅ Login successful!";
+            statusBox.textContent = "✅ Registration successful!";
             window.location.href = "index.html";
           } else {
             statusBox.textContent = "❌ Invalid response.";
